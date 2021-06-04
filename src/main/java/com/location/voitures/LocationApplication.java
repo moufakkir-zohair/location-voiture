@@ -172,17 +172,6 @@ public class LocationApplication implements CommandLineRunner {
 		c21.add(Calendar.DATE, 1);
 		dt2 = c21.getTime();
 		
-//		if(locationDaoImp.VerifierLocation(V, dt2)!=0) {
-//			System.out.println("kayan");
-//		}
-//		
-		
-		
-//	   voitureDaoImp.ChercherVoiture(1L).getCommentaires().add(new Commentaire("ssssss", new Date(), (CompteClient)compteDaoImp.ChercherCompte(1L)));
-//
-//		for(Commentaire commentaire :    voitureDaoImp.ChercherVoiture(1L).getCommentaires()) {
-//			System.out.println(commentaire.getCommentaire());
-//		}
-    // voitureDaoImp.ChercherVoiture(2L).getCommentaires().add(new Commentaire("ssssss", new Date(), (CompteClient)compteDaoImp.ChercherCompte(1L)));
+
 	}
 }

@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 public class Commentaire implements Serializable{
@@ -23,10 +26,12 @@ public class Commentaire implements Serializable{
 	
 	@ManyToOne (fetch = FetchType.LAZY) 
 	@JoinColumn( name="id_voiture" )
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Voiture voiture ;
 	
 	@ManyToOne (fetch = FetchType.LAZY) 
 	@JoinColumn( name="id_compte" )
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private CompteClient client;
 	
 	public Commentaire() {
@@ -35,11 +40,18 @@ public class Commentaire implements Serializable{
 
 	
 
-	public Commentaire(String commentaire, Date date, Voiture voiture, CompteClient client) {
+	public Commentaire(String commentaire, Date date, Voiture voiture , CompteClient client) {
 		super();
 		this.commentaire = commentaire;
 		this.date = date;
 		this.voiture = voiture;
+		this.client = client;
+	}
+
+	public Commentaire(String commentaire, Date date , CompteClient client) {
+		super();
+		this.commentaire = commentaire;
+		this.date = date;
 		this.client = client;
 	}
 
@@ -65,6 +77,7 @@ public class Commentaire implements Serializable{
 		return id_commentaire;
 	}
 
+	
 	public Voiture getVoiture() {
 		return voiture;
 	}
@@ -73,6 +86,7 @@ public class Commentaire implements Serializable{
 		this.voiture = voiture;
 	}
 
+	
 	public CompteClient getClient() {
 		return client;
 	}

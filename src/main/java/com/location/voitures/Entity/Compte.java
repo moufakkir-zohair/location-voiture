@@ -1,5 +1,4 @@
 package com.location.voitures.Entity;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
-@DiscriminatorColumn( name="type_compte", discriminatorType = DiscriminatorType.STRING )
+@DiscriminatorColumn( name="type_Compte", discriminatorType = DiscriminatorType.STRING )
 public abstract class  Compte {
 
 	@Id

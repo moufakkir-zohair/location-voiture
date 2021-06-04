@@ -6,7 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("CM")
+@DiscriminatorValue("cm")
 public class CompteManager extends Compte implements Serializable{
 
 	public CompteManager() {
@@ -16,10 +16,7 @@ public class CompteManager extends Compte implements Serializable{
 	public CompteManager(String cin, String prenom, String email, String tele, String adresse, String nationalite,
 			String motpasse) {
 		super(cin, prenom, email, tele, adresse, nationalite, motpasse);
-		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	
+		
 }

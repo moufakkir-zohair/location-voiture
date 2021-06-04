@@ -8,9 +8,8 @@ import com.location.voitures.Entity.Voiture;
 public interface ICommentaireDao {
 	
    public Commentaire AjouterCommentaire(Commentaire C);
-   public List<Commentaire> ListeCommentaire(Voiture V);
-   public void ModifierCommentaire(Commentaire C);
-   public void SupprimerCommentaire(Commentaire C);
+   public Commentaire ModifierCommentaire(Commentaire C);
+   public void SupprimerCommentaire(Long id_commentaire);
    public Commentaire ChercherCommentaire(Long id_commentaire);
    
 }

@@ -1,9 +1,16 @@
 package com.location.voitures.Dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.location.voitures.Entity.Compte;
+import com.location.voitures.Entity.CompteClient;
+import com.location.voitures.Entity.CompteManager;
+import com.location.voitures.Entity.Location;
+import com.location.voitures.Repository.CompteClientRepository;
+import com.location.voitures.Repository.CompteManagerRepository;
 import com.location.voitures.Repository.CompteRepository;
 
 
@@ -13,10 +20,16 @@ public class CompteDaoImp  implements ICompteDao{
 	@Autowired
 	private CompteRepository compteRepository;
 	
+	@Autowired
+	private CompteClientRepository compteClientRepository;
+	
+	@Autowired
+	private CompteManagerRepository compteManagerRepository;
+	
 	
 	@Override
-	public void AjouterCompte(Compte C) {
-		compteRepository.save(C);
+	public Compte AjouterCompte(Compte C) {
+		return compteRepository.save(C);
 	}
 
 	@Override
@@ -38,5 +51,24 @@ public class CompteDaoImp  implements ICompteDao{
 	public Compte VerifierCompte(String Email, String motpasse) {
 		return compteRepository.findByEmailAndMotpasse(Email,motpasse);
 	}
+
+	@Override
+	public List<CompteClient> ListeCompteClient() {
+		return compteClientRepository.findAll();
+	}
+
+	@Override
+	public List<CompteManager> ListeCompteManager() {
+		return compteManagerRepository.findAll();
+	}
+
+	@Override
+	public List<Location> ListeLocationCompte(Long id) {
+		CompteClient CC = (CompteClient) ChercherCompte(id);
+		return CC.getLocations();
+	}
+
+
+	
 
 }

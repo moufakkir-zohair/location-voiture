@@ -22,23 +22,18 @@ public class CommentaireDaoImp implements ICommentaireDao {
 	}
 
 	@Override
-	public List<Commentaire> ListeCommentaire(Voiture V) {
-		return commentaireRepository.findByVoiture(V);
-	}
-
-	@Override
-	public void ModifierCommentaire(Commentaire C) {
-		commentaireRepository.save(C);
-	}
-
-	@Override
-	public void SupprimerCommentaire(Commentaire C) {
-		commentaireRepository.deleteById(C.getId_commentaire());
-	}
-
-	@Override
 	public Commentaire ChercherCommentaire(Long id_commentaire) {
 		return commentaireRepository.findById(id_commentaire).orElse(null);
+	}
+
+	@Override
+	public Commentaire ModifierCommentaire(Commentaire C) {
+		return commentaireRepository.save(C);
+	}
+
+	@Override
+	public void SupprimerCommentaire(Long id_commentaire) {
+		commentaireRepository.deleteById(id_commentaire);
 	}
 
 }

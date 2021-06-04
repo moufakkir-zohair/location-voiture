@@ -16,7 +16,6 @@ public class CompteAdmin extends Compte implements Serializable{
 	public CompteAdmin(String cin, String prenom, String email, String tele, String adresse, String nationalite,
 			String motpasse) {
 		super(cin, prenom, email, tele, adresse, nationalite, motpasse);
-		// TODO Auto-generated constructor stub
 	}
 
 	

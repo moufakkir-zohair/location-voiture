@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Location implements Serializable{
@@ -22,12 +25,12 @@ public class Location implements Serializable{
 	private boolean acceptee;
 	private boolean effectuee;
 	
-	
-	@ManyToOne  (fetch = FetchType.LAZY)
+	@ManyToOne  (fetch = FetchType.EAGER)
 	@JoinColumn( name="id_voiture" )
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Voiture voiture;
 	
-	
+
 	@ManyToOne  (fetch = FetchType.LAZY)
 	@JoinColumn( name="id_compte" )
 	private CompteClient client;
@@ -37,13 +40,20 @@ public class Location implements Serializable{
 		super();
 	}
 
-	public Location(Date date_debut, Date date_fin, boolean acceptee, boolean effectuee) {
+    
+
+	public Location(Date date_debut, Date date_fin, boolean acceptee, boolean effectuee, Voiture voiture,
+			CompteClient client) {
 		super();
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
 		this.acceptee = acceptee;
 		this.effectuee = effectuee;
+		this.voiture = voiture;
+		this.client = client;
 	}
+
+
 
 	public Date getDate_debut() {
 		return date_debut;
@@ -77,6 +87,7 @@ public class Location implements Serializable{
 		this.effectuee = effectuee;
 	}
 
+
 	public Voiture getVoiture() {
 		return voiture;
 	}
@@ -85,5 +96,12 @@ public class Location implements Serializable{
 		this.voiture = voiture;
 	}
 
+
+
+	public Long getId_location() {
+		return id_location;
+	}
+
+	
 	
 }

@@ -6,12 +6,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Voiture implements Serializable {
@@ -31,19 +39,26 @@ public class Voiture implements Serializable {
 	private String boiteAvitesse;
 	private String puissanceFiscale;
 	
-	@OneToMany
+	
+	@ManyToMany
     @JoinTable( name = "Equipements_voiture",
                 joinColumns = @JoinColumn( name = "id_voiture" ),
-                inverseJoinColumns = @JoinColumn( name = "id_equipement" ) )
-    private List<Equipement> equipements = new ArrayList<>();
+                inverseJoinColumns = @JoinColumn( name = "id_equipement"))
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Equipement> equipements= new ArrayList<>();
 	
 	
 	@OneToMany(mappedBy = "voiture", cascade = CascadeType.REMOVE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Location> locations;
 	
 	
 	@OneToMany(mappedBy = "voiture", cascade = CascadeType.REMOVE)
-    private List<Commentaire> commentaires;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Commentaire> commentaires ;
 	
 	
 	
@@ -205,6 +220,7 @@ public class Voiture implements Serializable {
 	}
 
 
+	
 	public List<Location> getLocations() {
 		return locations;
 	}

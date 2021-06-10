@@ -98,5 +98,13 @@ public class VoitureController {
 		System.out.println("id_voiture= "+id_voiture);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+   private  VoitureRepository  voitureRepository;
+	@PostMapping(path = "/uploadPhoto/{id}")
+    public void uploadPhoto(MultipartFile file, @PathVariable Long id) throws Exception{
+       Product v=voitureRepository.findById(id).get();
+       v.setPhoto(file.getOriginalFilename());
+       Files.write(Paths.get(System.getProperty("user.home")+"/xxxx/"+v.getPhoto()),file.getBytes());
+       voitureRepository.save(v);
+    }
 	
 }
